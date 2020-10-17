@@ -1,5 +1,12 @@
 #include <gtest/gtest.h>
 #include <rubik.h>
+#include <solver.h>
+
+#include <tuple>
+#include <vector>
+
+using std::vector;
+using std::tuple;
 
 namespace rbk
 {
@@ -205,5 +212,155 @@ namespace rbk
 
         EXPECT_EQ(r.L().l(), r);
         EXPECT_EQ(r.l().L(), r);
+    }
+
+    TEST(solve, Uu) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto Uu = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::U, x.U() },
+                { twist::u, x.u() },
+            };
+        };
+
+        auto steps{ solve(Uu, r.U(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::u);
+    }
+
+    TEST(solve, uU) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto uU = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::U, x.U() },
+                { twist::u, x.u() },
+            };
+        };
+
+        auto steps{ solve(uU, r.u(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::U);
+    }
+
+    TEST(solve, Ll) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto Ll = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::L, x.L() },
+                { twist::l, x.l() },
+            };
+        };
+
+        auto steps{ solve(Ll, r.L(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::l);
+    }
+
+    TEST(solve, lL) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto lL = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::L, x.L() },
+                { twist::l, x.l() },
+            };
+        };
+
+        auto steps{ solve(lL, r.l(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::L);
+    }
+
+    TEST(solve, Ff) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto Ff = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::F, x.F() },
+                { twist::f, x.f() },
+            };
+        };
+
+        auto steps{ solve(Ff, r.F(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::f);
+    }
+
+    TEST(solve, fF) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto Ff = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::F, x.F() },
+                { twist::f, x.f() },
+            };
+        };
+
+        auto steps{ solve(Ff, r.f(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::F);
     }
 }
