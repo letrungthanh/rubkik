@@ -10,7 +10,7 @@ using std::tuple;
 
 namespace rbk
 {
-    TEST(U, normal) {
+    TEST(rotate, U) {
         rubik c{
             color::brw, color::rwb, color::wbr,
             color::bwo, color::wob, color::obw,
@@ -36,7 +36,7 @@ namespace rbk
         EXPECT_EQ(r.U(), c);
     }
 
-    TEST(L, normal) {
+    TEST(rotate, L) {
         rubik c{
             color::wgo, color::gow, color::owg,
             color::rwb, color::wbr, color::brw,
@@ -62,7 +62,7 @@ namespace rbk
         EXPECT_EQ(r.L(), c);
     }
 
-    TEST(F, normal) {
+    TEST(rotate, F) {
         rubik c{
             color::ryg, color::ygr, color::gry,
             color::rgw, color::gwr, color::wrg,
@@ -88,7 +88,7 @@ namespace rbk
         EXPECT_EQ(r.F(), c);
     }
 
-    TEST(u, normal) {
+    TEST(rotate, u) {
         rubik c{
             color::gow, color::owg, color::wgo,
             color::gwr, color::wrg, color::rgw,
@@ -114,7 +114,7 @@ namespace rbk
         EXPECT_EQ(r.u(), c);
     }
 
-    TEST(l, normal) {
+    TEST(rotate, l) {
         rubik c{
             color::ygr, color::gry, color::ryg,
             color::rwb, color::wbr, color::brw,
@@ -140,7 +140,7 @@ namespace rbk
         EXPECT_EQ(r.l(), c);
     }
 
-    TEST(f, normal) {
+    TEST(rotate, f) {
         rubik c{
             color::rwb, color::wbr, color::brw,
             color::rby, color::byr, color::yrb,
@@ -166,7 +166,7 @@ namespace rbk
         EXPECT_EQ(r.f(), c);
     }
 
-    TEST(Uu, normal) {
+    TEST(rotatecomplement, Uu) {
         rubik r{
             color::rgw, color::gwr, color::wrg,
             color::rwb, color::wbr, color::brw,
@@ -182,7 +182,7 @@ namespace rbk
         EXPECT_EQ(r.u().U(), r);
     }
 
-    TEST(Ff, normal) {
+    TEST(rotatecomplement, Ff) {
         rubik r{
             color::rgw, color::gwr, color::wrg,
             color::rwb, color::wbr, color::brw,
@@ -198,7 +198,7 @@ namespace rbk
         EXPECT_EQ(r.f().F(), r);
     }
 
-    TEST(Ll, normal) {
+    TEST(rotatecomplement, Ll) {
         rubik r{
             color::rgw, color::gwr, color::wrg,
             color::rwb, color::wbr, color::brw,
@@ -362,5 +362,55 @@ namespace rbk
 
         EXPECT_EQ(steps.size(), 1);
         EXPECT_EQ(steps[0], twist::F);
+    }
+
+    TEST(solve, Rr) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto Rr = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::R, x.R() },
+                { twist::r, x.r() },
+            };
+        };
+
+        auto steps{ solve(Rr, r.R(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::r);
+    }
+
+    TEST(solve, rR) {
+        rubik r{
+            color::rgw, color::gwr, color::wrg,
+            color::rwb, color::wbr, color::brw,
+            color::ryg, color::ygr, color::gry,
+            color::rby, color::byr, color::yrb,
+            color::owg, color::wgo, color::gow,
+            color::obw, color::bwo, color::wob,
+            color::ogy, color::gyo, color::yog,
+            color::oyb, color::ybo, color::boy,
+        };
+
+        auto rR = [](rubik const& x) {
+            return vector<tuple<twist, rubik>>{
+                { twist::R, x.R() },
+                { twist::r, x.r() },
+            };
+        };
+
+        auto steps{ solve(rR, r.r(), r) };
+
+        EXPECT_EQ(steps.size(), 1);
+        EXPECT_EQ(steps[0], twist::R);
     }
 }

@@ -126,7 +126,18 @@ namespace rbk
     {
         rubik c{ *this };
 
-        
+        c[rubik::rfu] = clr[rubik::rdf];
+        c[rubik::rub] = clr[rubik::rfu];
+        c[rubik::rbd] = clr[rubik::rub];
+        c[rubik::rdf] = clr[rubik::rbd];
+        c[rubik::urf] = clr[rubik::frd];
+        c[rubik::ubr] = clr[rubik::fur];
+        c[rubik::frd] = clr[rubik::drb];
+        c[rubik::fur] = clr[rubik::dfr];
+        c[rubik::drb] = clr[rubik::bru];
+        c[rubik::dfr] = clr[rubik::bdr];
+        c[rubik::bdr] = clr[rubik::ubr];
+        c[rubik::bru] = clr[rubik::urf];
 
         return c;
     }
@@ -135,7 +146,18 @@ namespace rbk
     {
         rubik c{ *this };
 
-        
+        c[rubik::rdf] = clr[rubik::rfu];
+        c[rubik::rfu] = clr[rubik::rub];
+        c[rubik::rub] = clr[rubik::rbd];
+        c[rubik::rbd] = clr[rubik::rdf];
+        c[rubik::frd] = clr[rubik::urf];
+        c[rubik::fur] = clr[rubik::ubr];
+        c[rubik::drb] = clr[rubik::frd];
+        c[rubik::dfr] = clr[rubik::fur];
+        c[rubik::bru] = clr[rubik::drb];
+        c[rubik::bdr] = clr[rubik::dfr];
+        c[rubik::ubr] = clr[rubik::bdr];
+        c[rubik::urf] = clr[rubik::bru];
 
         return c;
     }
@@ -144,7 +166,18 @@ namespace rbk
     {
         rubik c{ *this };
 
-
+        c[rubik::drb] = clr[rubik::dfr];
+        c[rubik::dbl] = clr[rubik::drb];
+        c[rubik::dlf] = clr[rubik::dbl];
+        c[rubik::dfr] = clr[rubik::dlf];
+        c[rubik::fdl] = clr[rubik::ldb];
+        c[rubik::frd] = clr[rubik::lfd];
+        c[rubik::rdf] = clr[rubik::fdl];
+        c[rubik::rbd] = clr[rubik::frd];
+        c[rubik::bdr] = clr[rubik::rdf];
+        c[rubik::bld] = clr[rubik::rbd];
+        c[rubik::ldb] = clr[rubik::bdr];
+        c[rubik::lfd] = clr[rubik::bld];
 
         return c;
     }
@@ -153,7 +186,18 @@ namespace rbk
     {
         rubik c{ *this };
 
-
+        c[rubik::dfr] = clr[rubik::drb];
+        c[rubik::drb] = clr[rubik::dbl];
+        c[rubik::dbl] = clr[rubik::dlf];
+        c[rubik::dlf] = clr[rubik::dfr];
+        c[rubik::ldb] = clr[rubik::fdl];
+        c[rubik::lfd] = clr[rubik::frd];
+        c[rubik::fdl] = clr[rubik::rdf];
+        c[rubik::frd] = clr[rubik::rbd];
+        c[rubik::rdf] = clr[rubik::bdr];
+        c[rubik::rbd] = clr[rubik::bld];
+        c[rubik::bdr] = clr[rubik::ldb];
+        c[rubik::bld] = clr[rubik::lfd];
 
         return c;
     }
@@ -162,7 +206,18 @@ namespace rbk
     {
         rubik c{ *this };
 
-
+        c[rubik::bru] = clr[rubik::bdr];
+        c[rubik::bul] = clr[rubik::bru];
+        c[rubik::bld] = clr[rubik::bul];
+        c[rubik::bdr] = clr[rubik::bld];
+        c[rubik::ubr] = clr[rubik::rbd];
+        c[rubik::ulb] = clr[rubik::rub];
+        c[rubik::lbu] = clr[rubik::ubr];
+        c[rubik::ldb] = clr[rubik::ulb];
+        c[rubik::dbl] = clr[rubik::lbu];
+        c[rubik::drb] = clr[rubik::ldb];
+        c[rubik::rub] = clr[rubik::drb];
+        c[rubik::rbd] = clr[rubik::dbl];
 
         return c;
     }
@@ -171,7 +226,18 @@ namespace rbk
     {
         rubik c{ *this };
 
-
+        c[rubik::bdr] = clr[rubik::bru];
+        c[rubik::bru] = clr[rubik::bul];
+        c[rubik::bul] = clr[rubik::bld];
+        c[rubik::bld] = clr[rubik::bdr];
+        c[rubik::rbd] = clr[rubik::ubr];
+        c[rubik::rub] = clr[rubik::ulb];
+        c[rubik::ubr] = clr[rubik::lbu];
+        c[rubik::ulb] = clr[rubik::ldb];
+        c[rubik::lbu] = clr[rubik::dbl];
+        c[rubik::ldb] = clr[rubik::drb];
+        c[rubik::drb] = clr[rubik::rub];
+        c[rubik::dbl] = clr[rubik::rbd];
 
         return c;
     }
